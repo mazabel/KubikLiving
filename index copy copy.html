@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KUBIKLIVING 8I8 — Residencias Urbanas en Bogotá</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=plein@300,400,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dark: #1c1c1c;
+  --warm-gray: #5b5a57;
+  --soft-neutral: #93918a;
+  --light-bg: #e8e2d4;
+  --olive: #545b47;
+  --muted-green: #93935f;
+  --white: #f5f2ec;
+  --serif: 'Funnel Display', 'Helvetica Neue', sans-serif;
+  --sans: 'Plein', 'Helvetica Neue', sans-serif;
+  --condensed: 'Funnel Display', 'Arial Narrow', sans-serif;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--light-bg); color: var(--dark); font-family: var(--sans); font-weight: 300; overflow-x: hidden; }
+
+/* ═══════════════════ NAV ═══════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: stretch; height: 64px;
+  transition: background 0.4s;
+}
+nav.scrolled { background: rgba(28,28,28,0.97); backdrop-filter: blur(10px); }
+.nav-logo {
+  display: flex; align-items: center; padding: 0 28px;
+  border-right: 1px solid rgba(245,242,236,0.12);
+  text-decoration: none; flex-shrink: 0;
+}
+.nav-logo-text {
+  font-family: var(--condensed); font-size: 1.25rem; font-weight: 700;
+  letter-spacing: 0.1em; color: var(--white); text-transform: uppercase; line-height: 1;
+}
+.nav-logo-text em { color: var(--muted-green); font-style: normal; }
+.nav-city {
+  display: flex; align-items: center; gap: 7px; padding: 0 22px;
+  border-right: 1px solid rgba(245,242,236,0.12); cursor: pointer; flex-shrink: 0;
+}
+.nav-city p { font-size: 0.72rem; letter-spacing: 0.08em; color: rgba(245,242,236,0.8); font-weight: 400; }
+.nav-city svg { width: 10px; height: 6px; stroke: rgba(245,242,236,0.5); fill: none; stroke-width: 2; }
+.nav-links { display: flex; align-items: stretch; list-style: none; margin-left: auto; }
+.nav-links li { display: flex; align-items: stretch; }
+.nav-links a {
+  display: flex; align-items: center; padding: 0 20px;
+  font-size: 0.72rem; font-weight: 400; letter-spacing: 0.08em;
+  color: rgba(245,242,236,0.78); text-decoration: none;
+  border-left: 1px solid rgba(245,242,236,0.08);
+  transition: color 0.25s, background 0.25s; white-space: nowrap;
+}
+.nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.04); }
+.nav-book { background: var(--dark) !important; color: var(--white) !important; font-weight: 500 !important; letter-spacing: 0.14em !important; padding: 0 32px !important; border-left: none !important; }
+.nav-book:hover { background: var(--olive) !important; }
+
+/* ═══════════════════ HERO ═══════════════════ */
+#hero {
+  position: relative; height: 100vh; min-height: 700px;
+  display: flex; align-items: flex-end; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: url('img/Image_202602182333.jpeg') 35% center/cover no-repeat;
+}
+.hero-bg::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 65% 40%, rgba(147,147,95,0.09) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 20% 70%, rgba(84,91,71,0.12) 0%, transparent 60%);
+}
+.hero-grid {
+  position: absolute; inset: 0; z-index: 1;
+  background-image:
+    linear-gradient(rgba(245,242,236,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,242,236,0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+.hero-fade {
+  position: absolute; inset: 0; z-index: 2;
+  background:
+    linear-gradient(to top, rgba(20,20,18,0.75) 0%, rgba(20,20,18,0.15) 50%, rgba(20,20,18,0.05) 100%),
+    linear-gradient(to right, rgba(20,20,18,0.25) 0%, transparent 55%);
+}
+.hero-content { position: relative; z-index: 3; width: 100%; padding-bottom: 52px; }
+.hero-headline {
+  font-family: var(--condensed);
+  font-size: clamp(3.5rem, 9vw, 8.5rem);
+  font-weight: 700; line-height: 0.88; color: var(--white);
+  text-transform: uppercase; letter-spacing: -0.01em;
+  padding: 0 0 0 52px; margin-bottom: 28px;
+  text-shadow: 0 4px 60px rgba(0,0,0,0.5);
+  animation: fadeUp 1s ease 0.1s both;
+}
+.hero-headline .dim { color: rgba(245,242,236,0.42); }
+.hero-bottom {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding: 0 52px; gap: 32px;
+  animation: fadeUp 1s ease 0.45s both;
+}
+.hero-eyebrow {
+  font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--muted-green); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before { content:''; display:inline-block; width:28px; height:1px; background:var(--muted-green); }
+.hero-sub { font-size: 0.85rem; font-weight: 300; color: rgba(245,242,236,0.6); line-height: 1.65; max-width: 420px; }
+.hero-btns { display: flex; gap: 12px; flex-shrink: 0; }
+.btn-primary {
+  background: var(--olive); color: var(--white); border: none;
+  padding: 15px 36px; font-family: var(--sans); font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none;
+  cursor: pointer; transition: background 0.3s; display: inline-block;
+}
+.btn-primary:hover { background: var(--muted-green); }
+.btn-ghost {
+  background: transparent; color: var(--white);
+  border: 1px solid rgba(245,242,236,0.35);
+  padding: 14px 36px; font-family: var(--sans); font-size: 0.7rem; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none;
+  cursor: pointer; transition: all 0.3s; display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
+.hero-scroll {
+  position: absolute; bottom: 58px; right: 52px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px; z-index: 3;
+  animation: fadeUp 1s ease 0.9s both;
+}
+.hero-scroll span { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(245,242,236,0.38); writing-mode: vertical-rl; }
+.scroll-line { width:1px; height:52px; background:linear-gradient(to bottom, rgba(245,242,236,0.38), transparent); animation:scrollPulse 2.4s ease infinite; }
+@keyframes scrollPulse { 0%,100%{opacity:0.35} 50%{opacity:1} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+/* ═══════════════════ SHARED ═══════════════════ */
+.section-label {
+  font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.32em;
+  text-transform: uppercase; color: var(--soft-neutral);
+  margin-bottom: 20px; display: flex; align-items: center; gap: 14px;
+}
+.section-label::before { content:''; display:block; width:28px; height:1px; background:var(--soft-neutral); flex-shrink:0; }
+.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.9s ease, transform 0.9s ease; }
+.reveal.visible { opacity:1; transform:none; }
+.d1 { transition-delay:0.15s; }
+.d2 { transition-delay:0.3s; }
+
+/* ═══════════════════ CONTEXT ═══════════════════ */
+#context { padding: 140px 56px; background: var(--light-bg); }
+.context-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 100px;
+  align-items: center; max-width: 1280px; margin: 0 auto;
+}
+.context-heading { font-family: var(--serif); font-size: clamp(2.4rem, 4vw, 4rem); font-weight: 300; line-height: 1.1; color: var(--dark); margin-bottom: 36px; }
+.context-heading em { font-style: italic; color: var(--warm-gray); }
+.context-body { font-size: 0.9rem; line-height: 1.85; color: var(--warm-gray); font-weight: 300; margin-bottom: 24px; max-width: 440px; }
+.context-stats { display: flex; gap: 40px; margin-top: 52px; }
+.context-stat h3 { font-family: var(--serif); font-size: 2.8rem; font-weight: 300; color: var(--dark); line-height: 1; margin-bottom: 6px; }
+.context-stat p { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--soft-neutral); }
+.context-visual { position: relative; height: 640px; }
+.ctx-main {
+  position: absolute; top: 0; right: 0; width: 82%; height: 440px;
+  overflow: hidden;
+}
+.ctx-main::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse 70% 60% at 60% 50%, rgba(147,147,95,0.12) 0%, transparent 70%),
+    linear-gradient(to bottom, transparent 60%, rgba(20,20,16,0.5) 100%);
+}
+.ctx-main::after {
+  content:''; position:absolute; top:20%; left:30%; width:2px; height:60%;
+  background:rgba(245,242,236,0.07);
+  box-shadow: 40px 0 0 rgba(245,242,236,0.04), 80px 0 0 rgba(245,242,236,0.03);
+}
+.ctx-detail {
+  position: absolute; bottom: 0; left: 0; width: 40%; height: 380px;
+  background: url('img/You_said_lets_202602182356.jpeg') center/cover no-repeat;
+  border: 4px solid var(--light-bg); overflow: hidden;
+}
+.ctx-detail::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse 80% 80% at 30% 60%, rgba(147,147,95,0.2) 0%, transparent 70%);
+}
+.ctx-lbl {
+  position: absolute; bottom: 18px; left: 18px; z-index: 2;
+  font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(245,242,236,0.45);
+}
+
+/* ═══════════════════ SUITES ═══════════════════ */
+#suites { padding: 120px 56px; background: var(--dark); }
+.suites-hdr {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  max-width: 1280px; margin: 0 auto 64px;
+  padding-bottom: 40px; border-bottom: 1px solid rgba(245,242,236,0.1);
+}
+.suites-h2 { font-family: var(--serif); font-size: clamp(2.2rem, 3.5vw, 3.4rem); font-weight: 300; color: var(--white); line-height: 1.1; }
+.suites-note { font-size: 0.82rem; color: rgba(245,242,236,0.4); max-width: 280px; text-align: right; line-height: 1.7; }
+.suites-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 1280px; margin: 0 auto; }
+.suite-card { background: #222220; overflow: hidden; transition: transform 0.5s; }
+.suite-card:hover { transform: translateY(-4px); }
+.suite-img { position: relative; height: 300px; overflow: hidden; }
+.suite-ibg { position: absolute; inset: 0; transition: transform 0.7s ease; }
+.suite-card:hover .suite-ibg { transform: scale(1.04); }
+.s1bg { }
+.s2bg { }
+.s3bg { }
+.suite-ibg::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 60% at 50% 50%, rgba(147,147,95,0.1) 0%, transparent 70%); }
+.suite-ibg::after { content:''; position:absolute; bottom:30%; left:20%; width:60%; height:1px; background:rgba(245,242,236,0.06); box-shadow:0 -40px 0 rgba(245,242,236,0.04); }
+.suite-iover { position:absolute; inset:0; background:linear-gradient(to top, rgba(28,28,28,0.85) 0%, transparent 55%); }
+.suite-badge { position:absolute; top:18px; left:18px; background:var(--olive); font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--white); padding:5px 12px; }
+.suite-acts { position:absolute; top:18px; right:18px; display:flex; gap:6px; }
+.s-btn { width:34px; height:34px; background:rgba(28,28,28,0.65); border:1px solid rgba(245,242,236,0.18); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.3s; }
+.s-btn:hover { background:var(--olive); border-color:var(--olive); }
+.s-btn svg { width:13px; height:13px; stroke:var(--white); fill:none; stroke-width:1.5; }
+.suite-body { padding: 28px 28px 36px; }
+.suite-type { font-size:0.6rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted-green); margin-bottom:10px; }
+.suite-name { font-family:var(--serif); font-size:1.6rem; font-weight:300; color:var(--white); margin-bottom:14px; line-height:1.15; }
+.suite-desc { font-size:0.78rem; color:rgba(245,242,236,0.48); line-height:1.75; margin-bottom:24px; }
+.suite-specs { display:grid; grid-template-columns:1fr 1fr; gap:10px 20px; margin-bottom:24px; padding-bottom:24px; border-bottom:1px solid rgba(245,242,236,0.08); }
+.spec { display:flex; align-items:center; gap:8px; }
+.spec-ico { width:16px; height:16px; flex-shrink:0; opacity:0.5; }
+.spec-txt strong { display:block; font-size:0.73rem; font-weight:400; color:rgba(245,242,236,0.85); }
+.spec-txt span { font-size:0.68rem; color:rgba(245,242,236,0.45); }
+.suite-price { display:flex; justify-content:space-between; margin-bottom:24px; }
+.plbl { font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--soft-neutral); margin-bottom:4px; }
+.pval { font-family:var(--serif); font-size:1.35rem; font-weight:300; color:var(--white); line-height:1; }
+.pcur { font-size:0.6rem; color:var(--soft-neutral); font-family:var(--sans); margin-left:2px; }
+.suite-cta { display:block; text-align:center; background:var(--olive); color:var(--white); text-decoration:none; padding:13px; font-size:0.67rem; letter-spacing:0.2em; text-transform:uppercase; transition:background 0.3s; }
+.suite-cta:hover { background:var(--muted-green); }
+
+/* ═══════════════════ ESPACIOS ═══════════════════ */
+#espacios { padding: 120px 56px; background: var(--light-bg); }
+.esp-hdr { display:flex; justify-content:space-between; align-items:flex-end; max-width:1280px; margin:0 auto 64px; }
+.esp-h2 { font-family:var(--serif); font-size:clamp(2rem,3.2vw,3.2rem); font-weight:300; color:var(--dark); line-height:1.1; }
+.esp-note { font-size:0.8rem; color:var(--soft-neutral); max-width:280px; text-align:right; line-height:1.7; }
+.esp-grid { display:grid; grid-template-columns:2fr 1fr; grid-template-rows:1fr 1fr; gap:3px; max-width:1280px; margin:0 auto; height:640px; }
+.esp { position:relative; overflow:hidden; cursor:pointer; }
+.esp:first-child { grid-row:span 2; }
+.esp-bg { position:absolute; inset:0; transition:transform 0.7s ease; }
+.esp:hover .esp-bg { transform:scale(1.04); }
+.elobby { background:linear-gradient(145deg,#2a2c26 0%,#1c1e18 50%,#282a22 100%); }
+.ecowork { background:linear-gradient(145deg,#24201c 0%,#1c1814 50%,#282420 100%); }
+.erooftop { background:linear-gradient(145deg,#20241e 0%,#181c16 50%,#242820 100%); }
+.esp-bg::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 60% at 50% 50%, rgba(147,147,95,0.1) 0%, transparent 65%); }
+.esp-over { position:absolute; inset:0; background:linear-gradient(to top, rgba(20,20,18,0.75) 0%, transparent 55%); }
+.esp-lbl { position:absolute; bottom:24px; left:24px; z-index:2; }
+.esp-lbl span { font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(245,242,236,0.5); }
+.esp-lbl h3 { font-family:var(--serif); font-size:1.5rem; font-weight:300; color:var(--white); }
+.gym-wrap { position:relative; height:260px; overflow:hidden; cursor:pointer; max-width:1280px; margin:3px auto 0; }
+.gym-bg { position:absolute; inset:0; background:linear-gradient(150deg,#1e2018 0%,#181a14 40%,#222420 70%,#1c1e18 100%); transition:transform 0.7s ease; }
+.gym-wrap:hover .gym-bg { transform:scale(1.04); }
+.gym-bg::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 90% 50% at 50% 50%, rgba(84,91,71,0.15) 0%, transparent 70%); }
+.gym-over { position:absolute; inset:0; background:linear-gradient(to top, rgba(20,20,18,0.7) 0%, transparent 55%); }
+.gym-lbl { position:absolute; bottom:24px; left:24px; z-index:2; }
+.gym-lbl span { font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(245,242,236,0.5); }
+.gym-lbl h3 { font-family:var(--serif); font-size:1.5rem; font-weight:300; color:var(--white); }
+
+/* ═══════════════════ SERVICIOS ═══════════════════ */
+#servicios { padding: 120px 56px; background: #eee8da; }
+.serv-inner { max-width: 1280px; margin: 0 auto; }
+.serv-top { display:grid; grid-template-columns:1fr 2fr; gap:80px; margin-bottom:72px; align-items:end; }
+.serv-h2 { font-family:var(--serif); font-size:clamp(2rem,3vw,3rem); font-weight:300; color:var(--dark); line-height:1.1; }
+.serv-h2 em { font-style:italic; color:var(--warm-gray); }
+.serv-body { font-size:0.88rem; color:var(--warm-gray); line-height:1.85; max-width:520px; }
+.serv-grid { display:grid; grid-template-columns:repeat(5,1fr); border-top:1px solid rgba(91,90,87,0.18); }
+.serv-item { padding:36px 24px; border-right:1px solid rgba(91,90,87,0.18); transition:background 0.3s; }
+.serv-item:last-child { border-right:none; }
+.serv-item:hover { background:rgba(84,91,71,0.06); }
+.serv-ico { width:32px; height:32px; margin-bottom:18px; }
+.serv-name { font-size:0.72rem; font-weight:500; letter-spacing:0.04em; color:var(--dark); margin-bottom:8px; }
+.serv-desc { font-size:0.7rem; color:var(--soft-neutral); line-height:1.65; }
+.serv-opt { margin-top:48px; padding-top:36px; border-top:1px solid rgba(91,90,87,0.18); display:flex; align-items:center; }
+.opt-lbl { font-size:0.6rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--soft-neutral); padding-right:36px; border-right:1px solid rgba(91,90,87,0.18); margin-right:36px; white-space:nowrap; }
+.opt-items { display:flex; gap:36px; flex-wrap:wrap; }
+.opt-item { display:flex; align-items:center; gap:10px; font-size:0.78rem; color:var(--warm-gray); }
+.opt-dot { width:5px; height:5px; background:var(--olive); border-radius:50%; }
+
+/* ═══════════════════ UBICACIÓN ═══════════════════ */
+#ubicacion { padding: 120px 56px; background: var(--dark); }
+.ubic-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; max-width:1280px; margin:0 auto; }
+.ubic-h2 { font-family:var(--serif); font-size:clamp(2rem,3.2vw,3.2rem); font-weight:300; color:var(--white); line-height:1.1; margin-bottom:24px; }
+.ubic-h2 em { font-style:italic; color:rgba(245,242,236,0.45); }
+.ubic-body { font-size:0.88rem; color:rgba(245,242,236,0.48); line-height:1.85; margin-bottom:40px; max-width:420px; }
+.ubic-stats { display:flex; gap:40px; }
+.ubic-stat h4 { font-family:var(--serif); font-size:1.5rem; font-weight:300; color:var(--white); margin-bottom:5px; }
+.ubic-stat p { font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(245,242,236,0.38); }
+.map-wrap { position:relative; height:460px; overflow:hidden; }
+.map-wrap iframe { width:100%; height:100%; border:none; filter:grayscale(1) contrast(0.85) brightness(0.7) sepia(0.15); opacity:0.8; }
+.map-brd { position:absolute; inset:0; border:1px solid rgba(245,242,236,0.08); pointer-events:none; }
+
+/* ═══════════════════ BOOKING ═══════════════════ */
+#booking { background: var(--olive); padding: 80px 56px; text-align: center; }
+.book-inner { max-width: 760px; margin: 0 auto; }
+.book-h2 { font-family:var(--serif); font-size:clamp(1.8rem,3vw,2.8rem); font-weight:300; color:var(--white); margin-bottom:14px; line-height:1.15; }
+.book-h2 em { font-style:italic; color:rgba(245,242,236,0.6); }
+.book-sub { font-size:0.82rem; color:rgba(245,242,236,0.6); margin-bottom:44px; }
+.book-form { background:rgba(28,28,28,0.3); border:1px solid rgba(245,242,236,0.14); display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:1px; margin-bottom:20px; }
+.bfield { background:rgba(28,28,28,0.35); padding:16px 20px; text-align:left; }
+.bfield label { display:block; font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:rgba(245,242,236,0.48); margin-bottom:6px; }
+.bfield input, .bfield select { background:transparent; border:none; outline:none; font-family:var(--serif); font-size:1rem; color:var(--white); width:100%; font-weight:300; -webkit-appearance:none; }
+.bfield input::placeholder { color:rgba(245,242,236,0.5); }
+.bfield select option { background:var(--dark); color:var(--white); }
+.book-btn { background:var(--dark); color:var(--white); border:none; padding:0 32px; font-family:var(--sans); font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; transition:background 0.3s; white-space:nowrap; }
+.book-btn:hover { background:#333; }
+.book-note { font-size:0.68rem; color:rgba(245,242,236,0.42); letter-spacing:0.04em; }
+
+/* ═══════════════════ FOOTER ═══════════════════ */
+footer { background: var(--dark); padding: 80px 56px 40px; border-top: 1px solid rgba(245,242,236,0.06); }
+.ft-inner { max-width: 1280px; margin: 0 auto; }
+.ft-top { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:80px; padding-bottom:64px; border-bottom:1px solid rgba(245,242,236,0.08); margin-bottom:36px; }
+.ft-brand-name { font-family:var(--condensed); font-size:1.15rem; font-weight:700; letter-spacing:0.12em; color:var(--white); text-transform:uppercase; margin-bottom:4px; }
+.ft-brand-name em { color:var(--muted-green); font-style:normal; }
+.ft-brand-sub { font-size:0.58rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--soft-neutral); margin-bottom:22px; }
+.ft-tagline { font-family:var(--serif); font-size:0.95rem; font-style:italic; color:rgba(245,242,236,0.38); line-height:1.6; max-width:280px; }
+.ft-socials { display:flex; gap:12px; margin-top:28px; }
+.ft-soc { width:34px; height:34px; border:1px solid rgba(245,242,236,0.14); display:flex; align-items:center; justify-content:center; text-decoration:none; transition:all 0.3s; font-size:0.6rem; color:rgba(245,242,236,0.48); letter-spacing:0.05em; }
+.ft-soc:hover { border-color:var(--olive); color:var(--white); }
+.ft-col h4 { font-size:0.6rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--soft-neutral); margin-bottom:22px; }
+.ft-col ul { list-style:none; }
+.ft-col ul li { margin-bottom:12px; }
+.ft-col ul li a { font-size:0.78rem; color:rgba(245,242,236,0.48); text-decoration:none; font-weight:300; transition:color 0.3s; }
+.ft-col ul li a:hover { color:var(--white); }
+.ft-bottom { display:flex; justify-content:space-between; align-items:center; }
+.ft-legal { font-size:0.66rem; color:rgba(245,242,236,0.28); }
+.ft-cta { background:var(--olive); color:var(--white); border:none; padding:12px 30px; font-family:var(--sans); font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; cursor:pointer; transition:background 0.3s; text-decoration:none; }
+.ft-cta:hover { background:var(--muted-green); }
+
+/* ═══════════════════ RESPONSIVE ═══════════════════ */
+
+@media (max-width: 1024px) {
+  nav { display: none !important; }
+  .mobile-nav-btn { display: flex !important; }
+
+  #hero { min-height: 100svh; }
+  .hero-headline { font-size: clamp(4rem, 11vw, 7rem); padding: 0 0 0 32px; }
+  .hero-bottom { padding: 0 32px; flex-direction: column; align-items: flex-start; gap: 24px; }
+  .hero-btns { width: 100%; }
+  .hero-scroll { right: 32px; }
+
+  #context { padding: 80px 32px; }
+  .context-inner { grid-template-columns: 1fr; gap: 56px; }
+  .context-visual { height: 360px; }
+  .ctx-main { width: 90%; height: 280px; }
+  .ctx-detail { width: 40%; height: 280px; }
+
+  #suites { padding: 80px 32px; }
+  .suites-hdr { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .suites-note { text-align: left; }
+  .suites-grid { grid-template-columns: 1fr; }
+
+  #espacios { padding: 80px 32px; }
+  .esp-hdr { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .esp-note { text-align: left; max-width: 100%; }
+  .esp-grid { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
+  .esp:first-child { grid-row: span 1; }
+  .esp { height: 280px; }
+  .gym-wrap { height: 200px; }
+
+  #servicios { padding: 80px 32px; }
+  .serv-top { grid-template-columns: 1fr; gap: 32px; }
+  .serv-grid { grid-template-columns: repeat(2,1fr); }
+  .serv-item:nth-child(2n) { border-right: none; }
+
+  #ubicacion { padding: 80px 32px; }
+  .ubic-inner { grid-template-columns: 1fr; gap: 48px; }
+  .map-wrap { height: 320px; }
+
+  #booking { padding: 60px 32px; }
+  .book-form { grid-template-columns: 1fr 1fr; }
+  .book-btn { grid-column: span 2; padding: 18px; }
+
+  footer { padding: 60px 32px 32px; }
+  .ft-top { grid-template-columns: 1fr 1fr; gap: 48px; }
+}
+
+@media (max-width: 640px) {
+  .hero-headline { font-size: clamp(3rem, 14vw, 4.5rem); padding: 0 0 0 24px; }
+  .hero-bg { background-position: 30% center !important; }
+  .hero-bottom { padding: 0 24px; }
+  .hero-sub { font-size: 0.78rem; }
+  .hero-btns { flex-direction: column; }
+  .btn-primary, .btn-ghost { text-align: center; width: 100%; padding: 16px; }
+  .hero-scroll { display: none; }
+
+  #context { padding: 64px 24px; }
+  .context-stats { flex-wrap: wrap; gap: 28px; }
+
+  #suites { padding: 64px 24px; }
+  .suite-price { flex-direction: column; gap: 12px; }
+
+  #espacios { padding: 64px 24px; }
+  .esp { height: 240px; }
+  .gym-wrap { height: 180px; }
+
+  #servicios { padding: 64px 24px; }
+  .serv-grid { grid-template-columns: 1fr; }
+  .serv-item { border-right: none !important; border-bottom: 1px solid rgba(91,90,87,0.18); }
+  .serv-item:last-child { border-bottom: none; }
+  .serv-opt { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .opt-lbl { border-right: none; padding-right: 0; margin-right: 0; padding-bottom: 16px; border-bottom: 1px solid rgba(91,90,87,0.18); width: 100%; }
+  .opt-items { flex-direction: column; gap: 14px; }
+
+  #ubicacion { padding: 64px 24px; }
+  .ubic-stats { flex-wrap: wrap; gap: 24px; }
+  .map-wrap { height: 260px; }
+
+  #booking { padding: 56px 24px; }
+  .book-form { grid-template-columns: 1fr; }
+  .book-btn { grid-column: span 1; padding: 18px; }
+
+  footer { padding: 56px 24px 28px; }
+  .ft-top { grid-template-columns: 1fr; gap: 40px; }
+  .ft-bottom { flex-direction: column; align-items: flex-start; gap: 20px; }
+}
+
+/* Mobile nav */
+.mobile-nav-btn {
+  display: none;
+  position: fixed; top: 16px; right: 16px; z-index: 200;
+  width: 44px; height: 44px; background: var(--dark);
+  border: none; cursor: pointer;
+  flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+}
+.mobile-nav-btn span { display: block; width: 22px; height: 1.5px; background: var(--white); transition: all 0.3s; }
+.mobile-nav-open .mobile-nav-btn span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.mobile-nav-open .mobile-nav-btn span:nth-child(2) { opacity: 0; }
+.mobile-nav-open .mobile-nav-btn span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.mobile-nav-overlay {
+  display: none; position: fixed; inset: 0;
+  background: var(--dark); z-index: 150;
+  flex-direction: column; justify-content: center; padding: 80px 40px;
+}
+.mobile-nav-open .mobile-nav-overlay { display: flex; }
+.mobile-nav-overlay a.m-logo { font-family: var(--condensed); font-size: 1.4rem; font-weight: 700; letter-spacing: 0.1em; color: var(--white); text-transform: uppercase; text-decoration: none; margin-bottom: 48px; display: block; }
+.mobile-nav-overlay a.m-logo em { color: var(--muted-green); font-style: normal; }
+.mobile-nav-overlay ul { list-style: none; width: 100%; }
+.mobile-nav-overlay ul li { border-top: 1px solid rgba(245,242,236,0.08); }
+.mobile-nav-overlay ul li a { display: block; padding: 18px 0; font-family: var(--condensed); font-size: 2rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(245,242,236,0.7); text-decoration: none; transition: color 0.2s; }
+.mobile-nav-overlay ul li a:hover { color: var(--white); }
+.mobile-nav-overlay .m-book { margin-top: 40px; display: inline-block; background: var(--olive); color: var(--white); text-decoration: none; padding: 16px 40px; font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; }
+
+/* ═══════════════════ CAROUSEL ═══════════════════ */
+.carousel { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.carousel-track { display: flex; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+.carousel-slide { min-width: 100%; height: 100%; position: relative; flex-shrink: 0; }
+.carousel-slide .slide-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.7s ease; }
+.suite-card:hover .carousel-slide .slide-bg { transform: scale(1.04); }
+.esp:hover .carousel-slide .slide-bg { transform: scale(1.04); }
+.carousel-arr { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 36px; height: 36px; background: rgba(28,28,28,0.6); backdrop-filter: blur(4px); border: 1px solid rgba(245,242,236,0.15); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; opacity: 0; }
+.carousel:hover .carousel-arr { opacity: 1; }
+.carousel-arr:hover { background: var(--olive); border-color: var(--olive); }
+.carousel-arr svg { width: 14px; height: 14px; stroke: var(--white); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.carousel-prev { left: 10px; }
+.carousel-next { right: 10px; }
+.carousel-dots { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); z-index: 5; display: flex; gap: 6px; opacity: 0; transition: opacity 0.3s; }
+.carousel:hover .carousel-dots { opacity: 1; }
+.carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(245,242,236,0.35); cursor: pointer; transition: all 0.3s; }
+.carousel-dot.active { background: var(--white); width: 18px; border-radius: 3px; }
+.carousel-counter { position: absolute; top: 18px; right: 62px; z-index: 5; font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(245,242,236,0.55); background: rgba(28,28,28,0.5); backdrop-filter: blur(4px); padding: 4px 10px; opacity: 0; transition: opacity 0.3s; }
+.carousel:hover .carousel-counter { opacity: 1; }
+.esp .carousel-arr { width: 32px; height: 32px; }
+.gym-wrap .carousel-arr { width: 32px; height: 32px; }
+.gym-wrap .carousel { height: 100%; }
+
+/* ═══════════════════ HERO HOVER EFFECTS ═══════════════════ */
+.hero-bg { transform-origin: center center; will-change: transform; }
+#hero .hero-fade { transition: opacity 1.2s ease; }
+#hero:hover .hero-fade { opacity: 0.88; }
+.hero-headline { will-change: transform; }
+.hero-bottom { will-change: transform; }
+
+/* ═══════════════════ LUXURY CURSOR ═══════════════════ */
+#hero { cursor: none; }
+.hero-cursor {
+  position: fixed; pointer-events: none; z-index: 999;
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid rgba(245,242,236,0.35);
+  transform: translate(-50%, -50%) scale(1);
+  transition: width 0.4s cubic-bezier(0.23,1,0.32,1), height 0.4s cubic-bezier(0.23,1,0.32,1), border-color 0.4s ease, background 0.4s ease, opacity 0.4s ease;
+  mix-blend-mode: difference;
+  opacity: 0;
+}
+.hero-cursor.visible { opacity: 1; }
+.hero-cursor.hovering {
+  width: 72px; height: 72px;
+  border-color: rgba(147,147,95,0.6);
+  background: rgba(147,147,95,0.08);
+}
+.hero-cursor-dot {
+  position: fixed; pointer-events: none; z-index: 1000;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(245,242,236,0.8);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.hero-cursor-dot.visible { opacity: 1; }
+
+/* ═══════════════════ BLUR TRAIL ═══════════════════ */
+.blur-trail-particle {
+  position: fixed; pointer-events: none; z-index: 998;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,242,236,0.07) 0%, rgba(147,147,95,0.03) 30%, transparent 65%);
+  filter: blur(25px);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+/* Blur mask that follows mouse over hero content */
+.hero-blur-spot {
+  position: fixed; pointer-events: none; z-index: 4;
+  width: 280px; height: 280px; border-radius: 50%;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  background: radial-gradient(circle, rgba(245,242,236,0.025) 0%, transparent 55%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  mask-image: radial-gradient(circle, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle, black 20%, transparent 70%);
+  will-change: transform;
+}
+.hero-blur-spot.visible { opacity: 1; }
+
+/* Remove ctx-detail carousel pseudo-elements since it's now a plain image */
+.ctx-detail::before { display: none; }
+
+</style>
+</head>
+<body>
+
+<!-- Mobile nav button -->
+<button class="mobile-nav-btn" id="mobileNavBtn" aria-label="Menú">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- Mobile nav overlay -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay">
+  <a class="m-logo" href="#"><img src="img/1771478690251_image.png" alt="KubikLiving" style="height:32px;width:auto;"></a>
+  <ul>
+    <li><a href="#suites" class="m-link">Apartamentos</a></li>
+    <li><a href="#espacios" class="m-link">Espacios</a></li>
+    <li><a href="#servicios" class="m-link">Servicios</a></li>
+    <li><a href="#ubicacion" class="m-link">Ubicación</a></li>
+    <li><a href="#booking" class="m-link">Contacto</a></li>
+  </ul>
+  <a href="#booking" class="m-book m-link">Book Now</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a class="nav-logo" href="#"><img src="img/1771478690251_image.png" alt="KubikLiving" style="height:28px;width:auto;"></a>
+  <div class="nav-city">
+    <p>Bogotá D.C.</p>
+    <svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#suites">Apartamentos</a></li>
+    <li><a href="#espacios">Espacios</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#ubicacion">Ubicación</a></li>
+    <li><a href="#booking">Contacto</a></li>
+    <li><a href="#booking" class="nav-book">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-fade"></div>
+  <div class="hero-content">
+    <h1 class="hero-headline">FLUXING<br><span class="dim">HOME</span></h1>
+    <div class="hero-bottom">
+      <div>
+        <p class="hero-eyebrow">Residencias Urbanas · 8I8 · Bogotá</p>
+        <p class="hero-sub">Residencias urbanas amobladas en Bogotá.<br>Arquitectura, privacidad y permanencia flexible.</p>
+      </div>
+      <div class="hero-btns">
+        <a href="#suites" class="btn-ghost">Explorar Suites</a>
+        <a href="#booking" class="btn-primary">Book Now</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- CONTEXT -->
+<section id="context">
+  <div class="context-inner">
+    <div class="reveal">
+      <p class="section-label">El Proyecto</p>
+      <h2 class="context-heading">Arquitectura que define<br><em>un nuevo estándar</em><br>en Bogotá.</h2>
+      <p class="context-body">KubikLiving 8i8 nace de la convicción de que el espacio bien construido transforma la manera en que habitamos la ciudad. Cada residencia es una declaración de precisión material: concreto expuesto, madera natural, luz calculada.</p>
+      <p class="context-body">Sin concesiones estéticas. Solo la permanencia honesta de los materiales, la generosidad del espacio y la ciudad como telón de fondo permanente.</p>
+      <div class="context-stats">
+        <div class="context-stat"><h3>8</h3><p>Residencias únicas</p></div>
+        <div class="context-stat"><h3>78–132</h3><p>m² interiores</p></div>
+        <div class="context-stat"><h3>100%</h3><p>Amobladas y equipadas</p></div>
+      </div>
+    </div>
+    <div class="context-visual reveal d2">
+      <div class="ctx-main">
+        <div class="carousel" data-carousel style="position:absolute;inset:0;">
+          <div class="carousel-track" style="height:100%;">
+            <div class="carousel-slide"><div class="slide-bg" style="background:url('img/Image_202602182345.jpeg') center/cover no-repeat;"></div></div>
+            <div class="carousel-slide"><div class="slide-bg" style="background:url('img/20260216_161941.jpg') center/cover no-repeat;"></div></div>
+          </div>
+          <div class="carousel-arr carousel-prev" onclick="slideCarousel(this,-1)"><svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg></div>
+          <div class="carousel-arr carousel-next" onclick="slideCarousel(this,1)"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></div>
+          <div class="carousel-dots"></div>
+          <div class="carousel-counter">1 / 2</div>
+        </div>
+        <span class="ctx-lbl">Arquitectura · Material · Luz</span>
+      </div>
+      <div class="ctx-detail">
+        <span class="ctx-lbl">Detalle constructivo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUITES -->
+<section id="suites">
+  <div class="suites-hdr reveal">
+    <div>
+      <p style="font-size:0.62rem;letter-spacing:0.32em;text-transform:uppercase;color:rgba(245,242,236,0.35);display:flex;align-items:center;gap:14px;margin-bottom:20px;">
+        <span style="display:block;width:28px;height:1px;background:rgba(245,242,236,0.25);flex-shrink:0;"></span>Residencias
+      </p>
+      <h2 class="suites-h2">Nuestras suites</h2>
+    </div>
+    <p class="suites-note">Tres configuraciones.<br>Una sola filosofía de habitación.</p>
+  </div>
+  <div class="suites-grid">
+
+    <div class="suite-card reveal">
+      <div class="suite-img">
+        <div class="carousel" data-carousel>
+          <div class="carousel-track"><div class="carousel-slide"><div class="slide-bg" style="background:url('img/Image_202602190009.jpeg') center/cover no-repeat;"></div></div><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(150deg,#2a2e24 0%,#1e2018 40%,#303428 70%,#282c20 100%);"></div></div><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(135deg,#3a3e34 0%,#2e3228 50%,#1e2018 100%);"></div></div><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(160deg,#242820 0%,#383c30 50%,#2a2e24 100%);"></div></div></div>
+          <div class="carousel-arr carousel-prev" onclick="slideCarousel(this,-1)"><svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg></div>
+          <div class="carousel-arr carousel-next" onclick="slideCarousel(this,1)"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></div>
+          <div class="carousel-dots"></div>
+          <div class="carousel-counter">1 / 3</div>
+        </div>
+        <div class="suite-iover"></div>
+        <span class="suite-badge">Terraza privada</span>
+        <div class="suite-acts">
+          <div class="s-btn" title="Tour 3D"><svg viewBox="0 0 16 16"><path d="M8 1L15 5v6L8 15 1 11V5z"/><path d="M8 1v14M1 5l7 4 7-4M8 9v6"/></svg></div>
+          <div class="s-btn" title="Video"><svg viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14"/></svg></div>
+        </div>
+      </div>
+      <div class="suite-body">
+        <p class="suite-type">Suite 01</p>
+        <h3 class="suite-name">Terrace Suite</h3>
+        <p class="suite-desc">Un apartamento que se abre hacia el cielo. La terraza privada de 60 m² redefine el límite entre interior y ciudad.</p>
+        <div class="suite-specs">
+          <div class="spec"><svg class="spec-ico" viewBox="0 0 16 16" fill="none" stroke="#93918a" stroke-width="1.2"><rect x="1" y="7" width="14" height="7"/><path d="M1 7L8 2l7 5"/><rect x="5" y="10" width="6" height="4"/></svg><div class="spec-txt"><strong>1 Alcoba</strong><span>hasta 3 huéspedes</span></div></div>
+          <div class="spec"><svg class="spec-ico" viewBox="0 0 16 16" fill="none" stroke="#93918a" stroke-width="1.2"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg><div class="spec-txt"><strong>2 Baños</strong><span>completos</span></div></div>
+          <div class="spec"><svg class="spec-ico" viewBox="0 0 16 16" fill="none" stroke="#93918a" stroke-width="1.2"><rect x="1" y="1" width="14" height="14"/><path d="M1 7h14M7 7v8"/></svg><div class="spec-txt"><strong>78 m²</strong><span>interior</span></div></div>
+          <div class="spec"><svg class="spec-ico" viewBox="0 0 16 16" fill="none" stroke="#93918a" stroke-width="1.2"><path d="M1 11L5 3l4 4 2-3 4 7"/><path d="M1 11h14"/></svg><div class="spec-txt"><strong>60 m²</strong><span>terraza privada</span></div></div>
+        </div>
+        <div class="suite-price">
+          <div><p class="plbl">Por noche</p><p class="pval">$950.000<span class="pcur">COP</span></p></div>
+          <div style="text-align:right"><p class="plbl">Mensual</p><p class="pval">$20.800.000<span class="pcur">COP</span></p></div>
+        </div>
+        <a href="#booking" class="suite-cta">Reservar esta suite</a>
+      </div>
+    </div>
+
+    <div class="suite-card reveal d1">
+      <div class="suite-img">
+        <div class="carousel" data-carousel>
+          <div class="carousel-track"><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(150deg,#282420 0%,#1e1c18 40%,#2c2820 70%,#201e18 100%);"></div></div><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(135deg,#342e28 0%,#28221c 50%,#1e1a16 100%);"></div></div><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(160deg,#201c18 0%,#302a24 50%,#282420 100%);"></div></div></div>
+          <div class="carousel-arr carousel-prev" onclick="slideCarousel(this,-1)"><svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg></div>
+          <div class="carousel-arr carousel-next" onclick="slideCarousel(this,1)"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></div>
+          <div class="carousel-dots"></div>
+          <div class="carousel-counter">1 / 3</div>
+        </div>
+        <div class="suite-iover"></div>
+        <span class="suite-badge">Vista ciudad</span>
+        <div class="suite-acts">
+          <div class="s-btn" title="Tour 3D"><svg viewBox="0 0 16 16"><path d="M8 1L15 5v6L8 15 1 11V5z"/><path d="M8 1v14M1 5l7 4 7-4M8 9v6"/></svg></div>
+          <div class="s-btn" title="Video"><svg viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14"/></svg></div>
+        </div>
+      </div>
+      <div class="suite-body">
+        <p class="suite-type">Suite 02</p>
+        <h3 class="suite-name">Superior Residence</h3>
+        <p class="suite-desc">132 m² articulados con precisión europea, donde cada habitación dialoga con la ciudad a través de ventanales de piso a techo.</p>
+        <div class="suite-specs">
+          <div class="spec"><svg class="spec-ico" viewBox="0 0 16 16" fill="none" stroke="#93918a" stroke-width="1.2"><rect x="1" y="7" width="14" height="7"/><path d="M1 7L8 2l7 5"/><rect x="5" y="10" width="6" height="4"/></svg><div class="spec-txt"><strong>2 Alcobas</strong><span>hasta 5 huéspedes</span></div></div>
+          <div class="spec"><svg class="spec-ico" viewBox="0 0 16 16" fill="none" stroke="#93918a" stroke-width="1.2"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg><div class="spec-txt"><strong>3 Baños</strong><span>completos</span></div></div>
+          <div class="spec"><svg class="spec-ico" viewBox="0 0 16 16" fill="none" stroke="#93918a" stroke-width="1.2"><rect x="1" y="1" width="14" height="14"/><path d="M1 7h14M7 7v8"/></svg><div class="spec-txt"><strong>132 m²</strong><span>interior</span></div></div>
+          <div class="spec"><svg class="spec-ico" viewBox="0 0 16 16" fill="none" stroke="#93918a" stroke-width="1.2"><path d="M1 11L5 3l4 4 2-3 4 7"/><path d="M1 11h14"/></svg><div class="spec-txt"><strong>Terraza</strong><span>incluida</span></div></div>
+        </div>
+        <div class="suite-price">
+          <div><p class="plbl">Por noche</p><p class="pval">$1.300.000<span class="pcur">COP</span></p></div>
+          <div style="text-align:right"><p class="plbl">Mensual</p><p class="pval">$28.800.000<span class="pcur">COP</span></p></div>
+        </div>
+        <a href="#booking" class="suite-cta">Reservar esta suite</a>
+      </div>
+    </div>
+
+    <div class="suite-card reveal d2">
+      <div class="suite-img">
+        <div class="carousel" data-carousel>
+          <div class="carousel-track"><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(150deg,#242820 0%,#1c2018 40%,#282c22 70%,#1e221a 100%);"></div></div><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(135deg,#2e3228 0%,#222620 50%,#1c2018 100%);"></div></div><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(160deg,#1c2018 0%,#2a2e26 50%,#242820 100%);"></div></div></div>
+          <div class="carousel-arr carousel-prev" onclick="slideCarousel(this,-1)"><svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg></div>
+          <div class="carousel-arr carousel-next" onclick="slideCarousel(this,1)"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></div>
+          <div class="carousel-dots"></div>
+          <div class="carousel-counter">1 / 3</div>
+        </div>
+        <div class="suite-iover"></div>
+        <span class="suite-badge">100 m² Terraza</span>
+        <div class="suite-acts">
+          <div class="s-btn" title="Tour 3D"><svg viewBox="0 0 16 16"><path d="M8 1L15 5v6L8 15 1 11V5z"/><path d="M8 1v14M1 5l7 4 7-4M8 9v6"/></svg></div>
+          <div class="s-btn" title="Video"><svg viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14"/></svg></div>
+        </div>
+      </div>
+      <div class="suite-body">
+        <p class="suite-type">Suite 03</p>
+        <h3 class="suite-name">Superior + Terrace</h3>
+        <p class="suite-desc">El equilibrio perfecto entre interior y exterior. 100 m² de terraza privada crean un segundo mundo de vida al aire libre sobre la ciudad.</p>
+        <div class="suite-specs">
+          <div class="spec"><svg class="spec-ico" viewBox="0 0 16 16" fill="none" stroke="#93918a" stroke-width="1.2"><rect x="1" y="7" width="14" height="7"/><path d="M1 7L8 2l7 5"/><rect x="5" y="10" width="6" height="4"/></svg><div class="spec-txt"><strong>2 Alcobas</strong><span>hasta 5 huéspedes</span></div></div>
+          <div class="spec"><svg class="spec-ico" viewBox="0 0 16 16" fill="none" stroke="#93918a" stroke-width="1.2"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg><div class="spec-txt"><strong>3 Baños</strong><span>completos</span></div></div>
+          <div class="spec"><svg class="spec-ico" viewBox="0 0 16 16" fill="none" stroke="#93918a" stroke-width="1.2"><rect x="1" y="1" width="14" height="14"/><path d="M1 7h14M7 7v8"/></svg><div class="spec-txt"><strong>132 m²</strong><span>interior</span></div></div>
+          <div class="spec"><svg class="spec-ico" viewBox="0 0 16 16" fill="none" stroke="#93918a" stroke-width="1.2"><path d="M1 11L5 3l4 4 2-3 4 7"/><path d="M1 11h14"/></svg><div class="spec-txt"><strong>100 m²</strong><span>terraza privada</span></div></div>
+        </div>
+        <div class="suite-price">
+          <div><p class="plbl">Por noche</p><p class="pval">$1.350.000<span class="pcur">COP</span></p></div>
+          <div style="text-align:right"><p class="plbl">Mensual</p><p class="pval">$30.000.000<span class="pcur">COP</span></p></div>
+        </div>
+        <a href="#booking" class="suite-cta">Reservar esta suite</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ESPACIOS -->
+<section id="espacios">
+  <div class="esp-hdr reveal">
+    <div>
+      <p class="section-label">Espacios comunes</p>
+      <h2 class="esp-h2">Vida más allá<br>del apartamento.</h2>
+    </div>
+    <p class="esp-note">Cada espacio curado con el mismo lenguaje material: concreto, madera, luz indirecta.</p>
+  </div>
+  <div class="esp-grid reveal">
+    <div class="esp">
+      <div class="carousel" data-carousel>
+        <div class="carousel-track"><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(145deg,#2a2c26 0%,#1c1e18 50%,#282a22 100%);"></div></div><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(135deg,#343632 0%,#262824 50%,#1e201c 100%);"></div></div><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(155deg,#1e201c 0%,#2c2e28 50%,#22241e 100%);"></div></div></div>
+        <div class="carousel-arr carousel-prev" onclick="slideCarousel(this,-1)"><svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg></div>
+        <div class="carousel-arr carousel-next" onclick="slideCarousel(this,1)"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></div>
+        <div class="carousel-dots"></div>
+      </div>
+      <div class="esp-over"></div>
+      <div class="esp-lbl"><span>01 / Arrival</span><h3>Lobby</h3></div>
+    </div>
+    <div class="esp">
+      <div class="carousel" data-carousel>
+        <div class="carousel-track"><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(145deg,#24201c 0%,#1c1814 50%,#282420 100%);"></div></div><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(135deg,#2e2a26 0%,#201c18 50%,#1a1612 100%);"></div></div><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(155deg,#1c1814 0%,#282420 50%,#22201c 100%);"></div></div></div>
+        <div class="carousel-arr carousel-prev" onclick="slideCarousel(this,-1)"><svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg></div>
+        <div class="carousel-arr carousel-next" onclick="slideCarousel(this,1)"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></div>
+        <div class="carousel-dots"></div>
+      </div>
+      <div class="esp-over"></div>
+      <div class="esp-lbl"><span>02 / Work</span><h3>Cowork</h3></div>
+    </div>
+    <div class="esp">
+      <div class="carousel" data-carousel>
+        <div class="carousel-track"><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(145deg,#20241e 0%,#181c16 50%,#242820 100%);"></div></div><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(135deg,#2a2e28 0%,#1e221c 50%,#161a14 100%);"></div></div><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(155deg,#181c16 0%,#262a22 50%,#202418 100%);"></div></div></div>
+        <div class="carousel-arr carousel-prev" onclick="slideCarousel(this,-1)"><svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg></div>
+        <div class="carousel-arr carousel-next" onclick="slideCarousel(this,1)"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></div>
+        <div class="carousel-dots"></div>
+      </div>
+      <div class="esp-over"></div>
+      <div class="esp-lbl"><span>03 / Sky</span><h3>Rooftop</h3></div>
+    </div>
+  </div>
+  <div class="gym-wrap reveal">
+    <div class="carousel" data-carousel style="position:absolute;inset:0;">
+      <div class="carousel-track" style="height:100%;"><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(150deg,#1e2018 0%,#181a14 40%,#222420 70%,#1c1e18 100%);"></div></div><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(135deg,#282a24 0%,#1c1e18 50%,#20221c 100%);"></div></div><div class="carousel-slide"><div class="slide-bg" style="background:linear-gradient(160deg,#181a14 0%,#242620 50%,#1e201a 100%);"></div></div></div>
+      <div class="carousel-arr carousel-prev" onclick="slideCarousel(this,-1)"><svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg></div>
+      <div class="carousel-arr carousel-next" onclick="slideCarousel(this,1)"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></div>
+      <div class="carousel-dots"></div>
+    </div>
+    <div class="gym-over"></div>
+    <div class="gym-lbl"><span>04 / Movement</span><h3>Gym</h3></div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="serv-inner">
+    <div class="serv-top">
+      <div class="reveal">
+        <p class="section-label">Servicios</p>
+        <h2 class="serv-h2">Todo lo necesario.<br><em>Nada más.</em></h2>
+      </div>
+      <p class="serv-body reveal d1">KubikLiving 8i8 opera con una filosofía de servicios precisos: aquello que verdaderamente transforma la experiencia de habitar está incluido. Lo opcional existe, pero no se impone.</p>
+    </div>
+    <div class="serv-grid reveal">
+      <div class="serv-item">
+        <svg class="serv-ico" viewBox="0 0 32 32" fill="none"><rect x="13" y="19" width="6" height="6" fill="#545b47"/><rect x="9" y="13" width="14" height="4" fill="#545b47" opacity="0.65"/><rect x="5" y="7" width="22" height="4" fill="#545b47" opacity="0.35"/></svg>
+        <p class="serv-name">WiFi Alta Velocidad</p><p class="serv-desc">Fibra dedicada por unidad. Sin límite de datos.</p>
+      </div>
+      <div class="serv-item">
+        <svg class="serv-ico" viewBox="0 0 32 32" fill="none"><rect x="14" y="3" width="4" height="16" fill="#545b47"/><rect x="8" y="19" width="16" height="4" fill="#545b47" opacity="0.7"/><rect x="10" y="23" width="12" height="5" fill="#545b47" opacity="0.4"/></svg>
+        <p class="serv-name">Aseo Programado</p><p class="serv-desc">Servicio semanal con horario flexible.</p>
+      </div>
+      <div class="serv-item">
+        <svg class="serv-ico" viewBox="0 0 32 32" fill="none"><rect x="3" y="7" width="26" height="18" fill="#545b47" opacity="0.25"/><rect x="3" y="7" width="26" height="5" fill="#545b47"/><rect x="7" y="16" width="7" height="5" fill="#545b47" opacity="0.7"/><rect x="18" y="16" width="7" height="5" fill="#545b47" opacity="0.7"/></svg>
+        <p class="serv-name">Cocina Equipada</p><p class="serv-desc">Electrodomésticos premium. Vajilla completa.</p>
+      </div>
+      <div class="serv-item">
+        <svg class="serv-ico" viewBox="0 0 32 32" fill="none"><rect x="8" y="3" width="16" height="12" fill="#545b47" opacity="0.4"/><rect x="4" y="13" width="24" height="16" fill="#545b47"/><rect x="13" y="18" width="6" height="7" fill="#e8e2d4"/></svg>
+        <p class="serv-name">Seguridad 24/7</p><p class="serv-desc">Acceso biométrico. Vigilancia permanente.</p>
+      </div>
+      <div class="serv-item">
+        <svg class="serv-ico" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" fill="#545b47" opacity="0.25"/><circle cx="16" cy="18" r="7" stroke="#545b47" stroke-width="3" fill="none"/><rect x="5" y="5" width="9" height="5" fill="#545b47" opacity="0.7"/></svg>
+        <p class="serv-name">Lavandería</p><p class="serv-desc">Lavadora y secadora in-suite.</p>
+      </div>
+    </div>
+    <div class="serv-opt reveal">
+      <p class="opt-lbl">Opcionales</p>
+      <div class="opt-items">
+        <div class="opt-item"><span class="opt-dot"></span>Transporte privado</div>
+        <div class="opt-item"><span class="opt-dot"></span>Servicio de chef</div>
+        <div class="opt-item"><span class="opt-dot"></span>Concierge extendido</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UBICACIÓN -->
+<section id="ubicacion">
+  <div class="ubic-inner">
+    <div class="reveal">
+      <p style="font-size:0.62rem;letter-spacing:0.32em;text-transform:uppercase;color:rgba(245,242,236,0.35);display:flex;align-items:center;gap:14px;margin-bottom:20px;">
+        <span style="display:block;width:28px;height:1px;background:rgba(245,242,236,0.25);flex-shrink:0;"></span>Ubicación
+      </p>
+      <h2 class="ubic-h2">En el núcleo<br>de <em>la ciudad</em><br>que cuenta.</h2>
+      <p class="ubic-body">KubikLiving 8i8 se sitúa en una de las arterias más estratégicas de Bogotá: conectado con los centros financieros, gastronómicos y culturales, pero con la discreción que solo otorgan las calles que aún no han sido saturadas.</p>
+      <div class="ubic-stats">
+        <div class="ubic-stat"><h4>8 min</h4><p>Centro financiero</p></div>
+        <div class="ubic-stat"><h4>3 min</h4><p>Zona gastronómica</p></div>
+        <div class="ubic-stat"><h4>15 min</h4><p>Aeropuerto El Dorado</p></div>
+      </div>
+    </div>
+    <div class="map-wrap reveal d1">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127362.37703882!2d-74.1469!3d4.7109!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9bdc8b0b5d75%3A0x8ef9a4e3f8f8e8f8!2sBogot%C3%A1!5e0!3m2!1ses!2sco!4v1697000000000!5m2!1ses!2sco" allowfullscreen loading="lazy"></iframe>
+      <div class="map-brd"></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="book-inner">
+    <p style="font-size:0.62rem;letter-spacing:0.32em;text-transform:uppercase;color:rgba(245,242,236,0.5);display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:20px;">
+      <span style="display:block;width:28px;height:1px;background:rgba(245,242,236,0.35);flex-shrink:0;"></span>Reservas · Powered by SiteMinder
+    </p>
+    <h2 class="book-h2">Su residencia en Bogotá<br><em>a un paso de distancia.</em></h2>
+    <p class="book-sub">Disponibilidad inmediata. Flexibilidad de 1 noche a 12 meses.</p>
+    <div class="book-form">
+      <div class="bfield"><label>Check-in</label><input type="date"></div>
+      <div class="bfield"><label>Check-out</label><input type="date"></div>
+      <div class="bfield">
+        <label>Suite</label>
+        <select>
+          <option value="">Todas las suites</option>
+          <option>Terrace Suite — 1BR · desde $950.000</option>
+          <option>Superior Residence — 2BR · desde $1.300.000</option>
+          <option>Superior + Terrace — 2BR · desde $1.350.000</option>
+        </select>
+      </div>
+      <button class="book-btn">Book Now →</button>
+    </div>
+    <p class="book-note">Pago seguro · Cancelación flexible · Sin cargos ocultos</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div>
+        <img src="img/1771478690251_image.png" alt="KubikLiving" style="height:30px;width:auto;margin-bottom:8px;">
+        <p class="ft-brand-sub">8I8 · Bogotá, Colombia</p>
+        <p class="ft-tagline">"Permanencia con intención. Arquitectura sin concesiones."</p>
+        <div class="ft-socials">
+          <a class="ft-soc" href="#">IG</a>
+          <a class="ft-soc" href="#">LI</a>
+          <a class="ft-soc" href="#">WA</a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Residencias</h4>
+        <ul>
+          <li><a href="#">Terrace Suite</a></li>
+          <li><a href="#">Superior Residence</a></li>
+          <li><a href="#">Superior + Terrace</a></li>
+          <li><a href="#">Ver disponibilidad</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>El proyecto</h4>
+        <ul>
+          <li><a href="#">Concepto</a></li>
+          <li><a href="#">Espacios</a></li>
+          <li><a href="#">Servicios</a></li>
+          <li><a href="#">Ubicación</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="/cdn-cgi/l/email-protection#8dffe8fee8fffbecfecde6f8efe4e6e1e4fbe4e3eaa3eee2"><span class="__cf_email__" data-cfemail="f18394829483879082b19a8493989a9d9887989f96df929e">[email&#160;protected]</span></a></li>
+          <li><a href="tel:+5716001234">+57 (1) 600 1234</a></li>
+          <li><a href="#">WhatsApp directo</a></li>
+          <li><a href="#">Solicitar información</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <p class="ft-legal">© 2025 KubikLiving 8i8 · Todos los derechos reservados · Política de privacidad · Términos y condiciones</p>
+      <a href="#booking" class="ft-cta">Book Now</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Mobile nav
+  const btn = document.getElementById('mobileNavBtn');
+  btn.addEventListener('click', () => document.body.classList.toggle('mobile-nav-open'));
+  document.querySelectorAll('.m-link').forEach(a => {
+    a.addEventListener('click', () => document.body.classList.remove('mobile-nav-open'));
+  });
+
+  // ═══════ CAROUSEL ENGINE ═══════
+  function slideCarousel(btn, dir) {
+    const carousel = btn.closest('[data-carousel]');
+    const track = carousel.querySelector('.carousel-track');
+    const slides = track.querySelectorAll('.carousel-slide');
+    const total = slides.length;
+    let idx = parseInt(carousel.dataset.idx || 0);
+    idx = (idx + dir + total) % total;
+    carousel.dataset.idx = idx;
+    track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+    updateDots(carousel, idx);
+    const counter = carousel.querySelector('.carousel-counter');
+    if (counter) counter.textContent = (idx + 1) + ' / ' + total;
+  }
+  function goToSlide(dot, idx) {
+    const carousel = dot.closest('[data-carousel]');
+    const track = carousel.querySelector('.carousel-track');
+    carousel.dataset.idx = idx;
+    track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+    updateDots(carousel, idx);
+    const counter = carousel.querySelector('.carousel-counter');
+    const total = track.querySelectorAll('.carousel-slide').length;
+    if (counter) counter.textContent = (idx + 1) + ' / ' + total;
+  }
+  function updateDots(carousel, activeIdx) {
+    carousel.querySelectorAll('.carousel-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === activeIdx);
+    });
+  }
+  document.querySelectorAll('[data-carousel]').forEach(carousel => {
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    const dotsWrap = carousel.querySelector('.carousel-dots');
+    carousel.dataset.idx = 0;
+    if (dotsWrap) {
+      slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => goToSlide(dot, i);
+        dotsWrap.appendChild(dot);
+      });
+    }
+    let startX = 0;
+    carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+    carousel.addEventListener('touchend', e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) {
+        const prevBtn = carousel.querySelector('.carousel-prev');
+        const nextBtn = carousel.querySelector('.carousel-next');
+        if (diff > 0 && nextBtn) slideCarousel(nextBtn, 1);
+        else if (diff < 0 && prevBtn) slideCarousel(prevBtn, -1);
+      }
+    }, {passive:true});
+  });
+
+  // ═══════ HERO PARALLAX + LUXURY CURSOR ═══════
+  const heroEl = document.getElementById('hero');
+  const heroBg = heroEl.querySelector('.hero-bg');
+  const heroHeadline = heroEl.querySelector('.hero-headline');
+  const heroBottom = heroEl.querySelector('.hero-bottom');
+
+  // Create luxury cursor elements
+  const cursorRing = document.createElement('div');
+  cursorRing.className = 'hero-cursor';
+  document.body.appendChild(cursorRing);
+  const cursorDot = document.createElement('div');
+  cursorDot.className = 'hero-cursor-dot';
+  document.body.appendChild(cursorDot);
+
+  // Parallax state
+  let mx = 0, my = 0;       // mouse normalized -0.5 to 0.5
+  let bx = 0, by = 0;       // background current
+  let tx = 0, ty = 0;       // text current
+  let ringX = 0, ringY = 0; // cursor ring current
+  let mouseX = 0, mouseY = 0; // raw mouse px
+  let heroActive = false;
+
+  function tick() {
+    // Smooth lerp for parallax
+    bx += (mx * -25 - bx) * 0.06;
+    by += (my * -16 - by) * 0.06;
+    tx += (mx * 10 - tx) * 0.05;
+    ty += (my * 7 - ty) * 0.05;
+
+    // Cursor ring follows with slight lag
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+
+    heroBg.style.transform = 'scale(1.06) translate3d(' + bx + 'px,' + by + 'px,0)';
+    heroHeadline.style.transform = 'translate3d(' + tx + 'px,' + ty + 'px,0)';
+    heroBottom.style.transform = 'translate3d(' + (tx*0.6) + 'px,' + (ty*0.6) + 'px,0)';
+
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
+    cursorDot.style.left = mouseX + 'px';
+    cursorDot.style.top = mouseY + 'px';
+
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  heroEl.addEventListener('mousemove', (e) => {
+    const rect = heroEl.getBoundingClientRect();
+    mx = (e.clientX - rect.left) / rect.width - 0.5;
+    my = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  heroEl.addEventListener('mouseenter', () => {
+    heroActive = true;
+    cursorRing.classList.add('visible');
+    cursorDot.classList.add('visible');
+  });
+
+  heroEl.addEventListener('mouseleave', () => {
+    heroActive = false;
+    mx = 0; my = 0;
+    cursorRing.classList.remove('visible', 'hovering');
+    cursorDot.classList.remove('visible');
+  });
+
+  // Expand cursor on interactive elements
+  heroEl.querySelectorAll('a, button, .btn-primary, .btn-ghost').forEach(el => {
+    el.addEventListener('mouseenter', () => cursorRing.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => cursorRing.classList.remove('hovering'));
+    el.style.cursor = 'none';
+  });
+
+  // ═══════ BLUR TRAIL ═══════
+  const POOL_SIZE = 22;
+  const trailPool = [];
+  for (let i = 0; i < POOL_SIZE; i++) {
+    const p = document.createElement('div');
+    p.className = 'blur-trail-particle';
+    const size = 100 + Math.random() * 120;
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    document.body.appendChild(p);
+    trailPool.push({ el: p });
+  }
+  let trailIdx = 0;
+  let lastTrailX = 0, lastTrailY = 0;
+  let trailActive = false;
+
+  // Blur spot that blurs text/content under cursor
+  const blurSpot = document.createElement('div');
+  blurSpot.className = 'hero-blur-spot';
+  document.body.appendChild(blurSpot);
+  let blurX = 0, blurY = 0, blurTargetX = 0, blurTargetY = 0;
+
+  function spawnTrail(x, y) {
+    const particle = trailPool[trailIdx % POOL_SIZE];
+    trailIdx++;
+    const el = particle.el;
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.style.opacity = '1';
+    el.style.transition = 'none';
+    el.offsetHeight;
+    el.style.transition = 'opacity 1.8s ease-out';
+    el.style.opacity = '0';
+  }
+
+  function tickBlurSpot() {
+    blurX += (blurTargetX - blurX) * 0.1;
+    blurY += (blurTargetY - blurY) * 0.1;
+    blurSpot.style.left = blurX + 'px';
+    blurSpot.style.top = blurY + 'px';
+    requestAnimationFrame(tickBlurSpot);
+  }
+  requestAnimationFrame(tickBlurSpot);
+
+  heroEl.addEventListener('mousemove', (e) => {
+    if (!trailActive) return;
+    blurTargetX = e.clientX;
+    blurTargetY = e.clientY;
+    const dx = e.clientX - lastTrailX;
+    const dy = e.clientY - lastTrailY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    if (dist > 8) {
+      spawnTrail(e.clientX, e.clientY);
+      lastTrailX = e.clientX;
+      lastTrailY = e.clientY;
+    }
+  });
+
+  heroEl.addEventListener('mouseenter', () => {
+    trailActive = true;
+    blurSpot.classList.add('visible');
+  });
+
+  heroEl.addEventListener('mouseleave', () => {
+    trailActive = false;
+    blurSpot.classList.remove('visible');
+  });
+
+  // Hide blur spot when hovering buttons
+  heroEl.querySelectorAll('a, button, .btn-primary, .btn-ghost').forEach(el => {
+    el.addEventListener('mouseenter', () => { blurSpot.style.opacity = '0'; });
+    el.addEventListener('mouseleave', () => { if(trailActive) blurSpot.style.opacity = '1'; });
+  });
+
+</script>
+</body>
+</html>

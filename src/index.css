@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Funnel+Display:wght@300..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-light-bg text-dark antialiased;
+  }
+}
+
+@layer components {
+  .hero-title {
+    font-family: 'Funnel Display', sans-serif;
+    font-size: clamp(4rem, 10vw, 8.5rem);
+    font-weight: 600;
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  .heading-lg {
+    font-family: 'Funnel Display', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    @apply text-4xl md:text-6xl lg:text-7xl leading-tight tracking-tight;
+  }
+
+  .heading-md {
+    font-family: 'Funnel Display', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    @apply text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight;
+  }
+
+  .subheading {
+    font-family: 'Funnel Display', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    @apply text-xl md:text-2xl leading-tight tracking-wide;
+  }
+
+  .text-editorial {
+    @apply text-base md:text-lg leading-relaxed;
+  }
+
+  .price-display {
+    font-family: 'Funnel Display', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    @apply text-2xl md:text-3xl;
+  }
+
+  .nav-link {
+    @apply text-xs tracking-widest text-dark/60 hover:text-dark transition-colors uppercase;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 text-sm tracking-wide uppercase font-sans font-medium transition-colors;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 text-sm tracking-wide uppercase font-sans font-medium border-2 transition-colors;
+  }
+
+  .btn-outline {
+    @apply px-6 py-3 border-2 border-white text-white uppercase text-sm tracking-wider font-medium hover:bg-white hover:text-black transition-all;
+  }
+}
